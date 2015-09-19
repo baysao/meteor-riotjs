@@ -1,0 +1,1 @@
+Riot = Npm.require('riot');

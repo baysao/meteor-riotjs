@@ -1,0 +1,1 @@
+Riot = window.riot;
