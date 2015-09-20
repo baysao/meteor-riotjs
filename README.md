@@ -1,5 +1,9 @@
 # riotjs: A React- like, 2.5K user interface library
 
+[Demo](http://simple-todos-riot-meteor-data.meteor.com/)
+
+[Code](https://github.com/baysao/simple-todos-riot-meteor-data.git)
+
 Custom tags • Virtual DOM • Full stack • IE8
 
 [Riot](https://muut.com/riotjs/) brings custom tags to all browsers
@@ -25,8 +29,10 @@ files in your client code.
 ```
 
 ## Some packages help integrate Riotjs to Meteor
+
 [RiotLayout](https://github.com/baysao/meteor-riot-layout)
 
 [RiotMeteorData](https://github.com/baysao/riot-meteor-data)
 
 [RiotTemplateHelper](https://github.com/baysao/riot-template-helper)
+
