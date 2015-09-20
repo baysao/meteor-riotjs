@@ -23,3 +23,8 @@ files in your client code.
 ```sh
     meteor add baysao:riotjs
 ```
+
+## Some packages help integrate Riotjs to Meteor
+[RiotLayout](https://github.com/baysao/meteor-riot-layout)
+[RiotMeteorData](https://github.com/baysao/riot-meteor-data)
+[RiotTemplateHelper](https://github.com/baysao/riot-template-helper)
