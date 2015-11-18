@@ -1,4 +1,4 @@
-var riotVersion = "2.2.4";
+var riotVersion = "2.3.1";
 
 Package.describe({
   summary: "A React- like, 2.5K user interface library",
@@ -11,20 +11,21 @@ Npm.depends({
   "riot": riotVersion
 });
 
+
 Package.registerBuildPlugin({
   name: "compileRiot",
   use: [],
   sources: [
-    'plugin/compile-riot.js'
+  'plugin/compile-riot.js'
   ],
   npmDependencies: {
-    "riot": riotVersion
+    "riot-compiler": "2.3.11"
   }
 });
 
 Package.onUse(function (api) {
-  api.addFiles (['.npm/package/node_modules/riot/riot.min.js', 'post.js'] , 'client');
-  api.addFiles ('riot_server.js', 'server');
+  api.use('isobuild:compiler-plugin@1.0.0');
+  api.addFiles (['.npm/package/node_modules/riot/riot.min.js', 'post.js'] , ['client']);
   api.export('Riot');
 });
 

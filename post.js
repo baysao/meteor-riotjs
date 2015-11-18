@@ -1,1 +1,2 @@
-Riot = window.riot;
+if(window && window.riot)
+	Riot = window.riot;
