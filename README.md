@@ -16,7 +16,7 @@ files in your client code.
 ```
 
 ## Support Riotjs Preprocessor 
-##### 1.Create file riot_packages in top project and add file config listing all npm packages of preprocessor you need to process. For ex: jade
+##### 1.Create file riot_packages.json in top project and add file config listing all npm packages of preprocessor you need to process. For ex: jade
 ```json
 {
 	"jade":"1.11.0"
