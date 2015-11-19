@@ -8,7 +8,7 @@ Base on package of [xaiki:riotjs](https://github.com/xaiki/meteor-riotjs.git), I
 
 ## Using
 
-just add it like you'd add any other meteor package and start editing `.tag` or `.tag.html`
+just add it like you'd add any other meteor package and start editing `.tag`
 files in your client code.
 
 ```sh
