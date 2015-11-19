@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "riot-compiler": {
+      "version": "2.3.11",
+      "dependencies": {
+        "riot-tmpl": {
+          "version": "2.3.12"
+        }
+      }
+    }
+  }
+}

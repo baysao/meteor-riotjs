@@ -2,7 +2,7 @@ var riotVersion = "2.3.1";
 
 Package.describe({
   summary: "A React- like, 2.5K user interface library",
-  version: riotVersion + "-3",
+  version: riotVersion + "-4",
   name: "baysao:riotjs",
   git: "https://github.com/baysao/meteor-riotjs.git"
 });
