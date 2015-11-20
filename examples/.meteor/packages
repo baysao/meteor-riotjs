@@ -22,5 +22,9 @@ insecure                # Allow all DB writes from clients (for prototyping)
 baysao:riotjs
 
 
+<<<<<<< HEAD
 
 baysao:riotjs-preprocessor-init
+=======
+baysao:riot-preprocessor
+>>>>>>> 4715d85ff5a54ae3c17905461f7dabface5f48be
