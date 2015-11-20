@@ -30,10 +30,6 @@ if (canProceed() && !fs.existsSync(npmContainerDir)) {
   console.log("=> Creating container package for npm modules");
     mkdirp.sync(npmContainerDir);
     fs.writeFileSync(compileRiotJsPath, getContent(_compileRiotJsContent));
-<<<<<<< HEAD
-=======
-    // fs.writeFileSync(postJsPath, getContent(_postJsContent));
->>>>>>> 4715d85ff5a54ae3c17905461f7dabface5f48be
     fs.writeFileSync(packageJsPath, getContent(_packageJsContent));
     var preprocessorAdded = false;
     if(fs.existsSync('.meteor/packages')) {
@@ -131,13 +127,8 @@ function _packageJsContent() {
   var fs = Npm.require('fs');
   Package.describe({
     summary: "Riot PreProcessor",
-<<<<<<< HEAD
     version: "0.1.0-1",
     name: "baysao:riotjs-preprocessor-init",
-=======
-    version: riotVersion + "-16",
-    name: "baysao:riot-preprocessor",
->>>>>>> 4715d85ff5a54ae3c17905461f7dabface5f48be
   });
   var pluginInfo = {
     name: "compileRiot",
@@ -155,7 +146,6 @@ function _packageJsContent() {
       pluginInfo.npmDependencies[i] = packages[i];
     }
     Package.registerBuildPlugin(pluginInfo);
-<<<<<<< HEAD
   } catch (ex) {
     console.error('ERROR: riot_packages.json parsing error [ ' + ex.message + ' ]');
   }
@@ -166,20 +156,6 @@ function _packageJsContent() {
     } else {
       api.addFiles('../../riot_packages.json', 'server', {
         isAsset: true
-=======
-      } catch (ex) {
-        console.error('ERROR: riot_packages.json parsing error [ ' + ex.message + ' ]');
-      }
-      Package.onUse(function(api) {
-        api.use('isobuild:compiler-plugin@1.0.0');
-        if (api.addAssets) {
-          api.addAssets('../../riot_packages.json', 'server');
-        } else {
-          api.addFiles('../../riot_packages.json', 'server', {
-            isAsset: true
-          });
-        }
->>>>>>> 4715d85ff5a54ae3c17905461f7dabface5f48be
       });
     }
   });

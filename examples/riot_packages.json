@@ -1,12 +1,6 @@
 {
-<<<<<<< HEAD
  "jade":"1.11.0",
  "coffee-script":"1.10.0",
  "stylus":"0.52.4",
  "nib":"1.1.0"
-=======
-	"jade":"1.11.0",
-	"coffee-script":"1.10.0",
-	"stylus":"0.52.4"
->>>>>>> 4715d85ff5a54ae3c17905461f7dabface5f48be
 }

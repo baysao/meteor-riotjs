@@ -4,36 +4,49 @@
 
 [Code](https://github.com/baysao/simple-todos-riot-meteor-data.git)
 
-Base on package of [xaiki:riotjs](https://github.com/xaiki/meteor-riotjs.git), I rewrite this package. After install package, you will access riot library by global Riot and your .tag files will automatic compiled.
+Base on package of [xaiki:riotjs](https://github.com/xaiki/meteor-riotjs.git), I rewrite this package. After install package, you will access riot library by global `Riot` variable.
 
 ## Using
 
-just add it like you'd add any other meteor package and start editing `.tag`
+just add it like you'd add any other meteor package and start editing `.tag` or `.tag.html`
 files in your client code.
 
 ```sh
     meteor add baysao:riotjs
 ```
 
-## Support Riotjs Preprocessor 
-##### 1.Create file riot_packages.json in top project and add file config listing all npm packages of preprocessor you need to process. For ex: jade
-```json
-{
-	"jade":"1.11.0"
-}
-```
-##### 2. Extension support would be ".tag.jade"
-##### 3. Other proprocessor support in list below with name and extension:
-* coffee: .tag.coffee
-* livescript: .tag.ls
-* typescript: .tag.ts
-* babel		: .tag.babel
-* es6		: .tag.es6
-* sass		: .tag.sass
-* scss		: .tag.scss
-* stylus	: .tag.styl
-* less		: .tag.less
 
+## Support Riotjs Preprocessor 
+
+This package using method like [meteorhacks:npm](https://github.com/meteorhacks/npm) to create new package `baysao:riotjs-preprocessor-init` and add to file `.meteor/packages` (you need to restart for first time) for monitoring package config file `riot_packages.json` at root project.
+
+In this package config, you need to add npm all packages that using for preprocessor. For ex, `jade` preprocessor need npm package `{"jade":"1.11.0"}`.
+
+If file has extension with '.tag.jade', compiler will automatic add option `{template:'jade'}`
+For preprocessor for style, you need to add `type` in `style` definition in `tag` file
+For ex. 
+```
+<style type="stylus">
+	#mytag2
+		color: yellow;
+</style>
+```
+tag file in jade
+
+```
+test1
+  style(type='stylus').
+    #mytag1
+     color: blue;
+  span#mytag1 Test
+  script(type='coffee').
+    square = (x) => x*x
+    console.log "run from coffee"
+    console.log square(2)
+  script.
+    console.log("run from normal")
+```
+Please check the list of preprocessor supported in [here](http://riotjs.com/guide/compiler/#pre-processors)
 
 
 ## Some packages help integrate Riotjs to Meteor
