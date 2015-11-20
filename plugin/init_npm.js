@@ -3,7 +3,7 @@ var fs = Npm.require('fs');
 var mkdirp = Npm.require('mkdirp');
 var echo = Npm.require('node-echo');
 var beautify = Npm.require('js-beautify');
-var npmContainerDir = path.resolve('./packages/riot-preprocessor');
+var npmContainerDir = path.resolve('./packages/meteor-riotjs-preprocessor-init');
 var packagesJsonPath = path.resolve('./riot_packages.json');
 var packageJsPath = path.resolve(npmContainerDir, 'package.js');
 var compileRiotJsPath = path.resolve(npmContainerDir, 'compile-riot.js');
@@ -18,37 +18,32 @@ if (canProceed() && !fs.existsSync(packagesJsonPath)) {
 var preprocessorAdded = false;
 if(fs.existsSync('.meteor/packages')) {
   fs.readFileSync('.meteor/packages').toString().split('\n').forEach(function(line) {
-   if(/^\s*baysao:riot-preprocessor/.test(line)) {
+   if(/^\s*baysao:riotjs-preprocessor-init/.test(line)) {
     preprocessorAdded = true;
   }
 })
 }
 if(!preprocessorAdded) {
- echo.sync("\nbaysao:riot-preprocessor", ">>", ".meteor/packages");
+ echo.sync("\nbaysao:riotjs-preprocessor-init", ">>", ".meteor/packages");
 }
 if (canProceed() && !fs.existsSync(npmContainerDir)) {
   console.log("=> Creating container package for npm modules");
-    // create new npm container directory
     mkdirp.sync(npmContainerDir);
-    // add package files
-    // fs.writeFileSync(indexJsPath, getContent(_indexJsContent));
     fs.writeFileSync(compileRiotJsPath, getContent(_compileRiotJsContent));
-    fs.writeFileSync(postJsPath, getContent(_postJsContent));
     fs.writeFileSync(packageJsPath, getContent(_packageJsContent));
-    // add new container as a package
     var preprocessorAdded = false;
     if(fs.existsSync('.meteor/packages')) {
       fs.readFileSync('.meteor/packages').toString().split('\n').forEach(function(line) {
-       if(/^\s*baysao:riot-preprocessor/.test(line)) {
+       if(/^\s*baysao:riotjs-preprocessor-init/.test(line)) {
         preprocessorAdded = true;
       }
     })
     }
     if(!preprocessorAdded) {
-     echo.sync("\nbaysao:riot-preprocessor", ">>", ".meteor/packages");
+     echo.sync("\nbaysao:riotjs-preprocessor-init", ">>", ".meteor/packages");
    }
 
-   // echo.sync("\nbaysao:riot-preprocessor", ">>", ".meteor/packages");
+   // echo.sync("\nbaysao:riotjs-preprocessor-init", ">>", ".meteor/packages");
    console.log();
    console.log("-> npm support has been initialized.")
    console.log("-> please start your app again.");
@@ -90,74 +85,31 @@ function getContent(func) {
 // Following function has been defined to just get the content inside them
 // They are not executables
 function _compileRiotJsContent() {
-  var compiler = Npm.require('riot-compiler');
+ var compiler = Npm.require('riot-compiler');
 
-  function RiotCompiler() {}
-  RiotCompiler.prototype.processFilesForTarget = function(files) {
-    files.forEach(function(file) {
-      var fileBasename = file.getBasename();
-      var content = file.getContentsAsString();
-      var output;
-      var opts = {};
-      if (/\.tag\.jade$/.test(fileBasename)) {
-        opts = {
-          template: "jade"
-        };
-      }
-      if (/\.tag\.coffee$/.test(fileBasename)) {
-        opts = {
-          type: "coffee"
-        };
-      }
-      if (/\.tag\.es6$/.test(fileBasename)) {
-        opts = {
-          type: "es6"
-        };
-      }
-      if (/\.tag\.ls$/.test(fileBasename)) {
-        opts = {
-          type: "livescript"
-        };
-      }
-      if (/\.tag\.babel$/.test(fileBasename)) {
-        opts = {
-          type: "babel"
-        };
-      }
-      if (/\.tag\.sass$/.test(fileBasename)) {
-        opts = {
-          style: "sass"
-        };
-      }
-      if (/\.tag\.scss$/.test(fileBasename)) {
-        opts = {
-          style: "scss"
-        };
-      }
-      if (/\.tag\.less$/.test(fileBasename)) {
-        opts = {
-          style: "less"
-        };
-      }
-      if (/\.tag\.styl$/.test(fileBasename)) {
-        opts = {
-          style: "stylus"
-        };
-      }
-      try{
-        output = compiler.compile(content, opts);
-        file.addJavaScript({
-          data: output,
-          path: file.getPathInPackage() + '.js'
-        });
-      }catch(e){
-      }
-    });
+ function RiotCompiler() {}
+ RiotCompiler.prototype.processFilesForTarget = function(files) {
+  files.forEach(function(file) {
+    var fileBasename = file.getBasename();
+    var content = file.getContentsAsString();
+    var output;
+    var ext = '.js';
+    var opts = {};
+    if (/\.tag\.jade$/.test(fileBasename)) {
+      opts.template = "jade";
+    }
+    try {
+      output = compiler.compile(content, opts);
+      file.addJavaScript({
+        data: output,
+        path: file.getPathInPackage() + ext
+      });
+    } catch (e) {}
+  });
 };
 Plugin.registerCompiler({
   extensions: [
-  "tag", "tag.jade", "tag.coffee", "tag.es6", "tag.ls", "tag.ts", 
-  "tag.babel", "tag.sass", "tag.scss", "tag.less", "tag.styl"
+  "tag","tag.html","tag.jade"
   ],
   filenames: []
 }, function() {
@@ -173,14 +125,10 @@ function _postJsContent() {
 function _packageJsContent() {
   var path = Npm.require('path');
   var fs = Npm.require('fs');
-  var riotVersion = "2.3.1";
   Package.describe({
     summary: "Riot PreProcessor",
-    version: riotVersion + "-16",
-    name: "baysao:riot-preprocessor",
-  });
-  Npm.depends({
-    "riot": riotVersion
+    version: "0.1.0-1",
+    name: "baysao:riotjs-preprocessor-init",
   });
   var pluginInfo = {
     name: "compileRiot",
@@ -198,20 +146,17 @@ function _packageJsContent() {
       pluginInfo.npmDependencies[i] = packages[i];
     }
     Package.registerBuildPlugin(pluginInfo);
-        // Npm.depends(packages);
-      } catch (ex) {
-        console.error('ERROR: riot_packages.json parsing error [ ' + ex.message + ' ]');
-      }
-      Package.onUse(function(api) {
-        api.use('isobuild:compiler-plugin@1.0.0');
-        if (api.addAssets) {
-          api.addAssets('../../riot_packages.json', 'server');
-        } else {
-          api.addFiles('../../riot_packages.json', 'server', {
-            isAsset: true
-          });
-        }
-        api.addFiles(['.npm/package/node_modules/riot/riot.min.js', 'post.js'], ['client']);
-        api.export('Riot');
+  } catch (ex) {
+    console.error('ERROR: riot_packages.json parsing error [ ' + ex.message + ' ]');
+  }
+  Package.onUse(function(api) {
+    api.use('isobuild:compiler-plugin@1.0.0');
+    if (api.addAssets) {
+      api.addAssets('../../riot_packages.json', 'server');
+    } else {
+      api.addFiles('../../riot_packages.json', 'server', {
+        isAsset: true
       });
     }
+  });
+}
