@@ -33,7 +33,7 @@ if (canProceed() && !fs.existsSync(npmContainerDir)) {
     // add package files
     // fs.writeFileSync(indexJsPath, getContent(_indexJsContent));
     fs.writeFileSync(compileRiotJsPath, getContent(_compileRiotJsContent));
-    fs.writeFileSync(postJsPath, getContent(_postJsContent));
+    // fs.writeFileSync(postJsPath, getContent(_postJsContent));
     fs.writeFileSync(packageJsPath, getContent(_packageJsContent));
     // add new container as a package
     var preprocessorAdded = false;
@@ -179,9 +179,6 @@ function _packageJsContent() {
     version: riotVersion + "-16",
     name: "baysao:riot-preprocessor",
   });
-  Npm.depends({
-    "riot": riotVersion
-  });
   var pluginInfo = {
     name: "compileRiot",
     use: [],
@@ -198,7 +195,6 @@ function _packageJsContent() {
       pluginInfo.npmDependencies[i] = packages[i];
     }
     Package.registerBuildPlugin(pluginInfo);
-        // Npm.depends(packages);
       } catch (ex) {
         console.error('ERROR: riot_packages.json parsing error [ ' + ex.message + ' ]');
       }
@@ -211,7 +207,5 @@ function _packageJsContent() {
             isAsset: true
           });
         }
-        api.addFiles(['.npm/package/node_modules/riot/riot.min.js', 'post.js'], ['client']);
-        api.export('Riot');
       });
     }

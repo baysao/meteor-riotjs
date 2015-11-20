@@ -1,0 +1,50 @@
+{
+  "dependencies": {
+    "js-beautify": {
+      "version": "1.5.5",
+      "dependencies": {
+        "config-chain": {
+          "version": "1.1.9",
+          "dependencies": {
+            "proto-list": {
+              "version": "1.2.4"
+            },
+            "ini": {
+              "version": "1.3.4"
+            }
+          }
+        },
+        "nopt": {
+          "version": "3.0.6",
+          "dependencies": {
+            "abbrev": {
+              "version": "1.0.7"
+            }
+          }
+        }
+      }
+    },
+    "mkdirp": {
+      "version": "0.5.0",
+      "dependencies": {
+        "minimist": {
+          "version": "0.0.8"
+        }
+      }
+    },
+    "node-echo": {
+      "version": "0.1.1",
+      "dependencies": {
+        "coffee-script": {
+          "version": "1.7.1"
+        },
+        "jistype": {
+          "version": "0.0.3"
+        },
+        "mkdirp": {
+          "version": "0.3.5"
+        }
+      }
+    }
+  }
+}
