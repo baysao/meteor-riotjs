@@ -104,7 +104,7 @@ function _compileRiotJsContent() {
         data: output,
         path: file.getPathInPackage() + ext
       });
-    } catch (e) {}
+    } catch (e) {console.log(e);}
   });
 };
 Plugin.registerCompiler({
