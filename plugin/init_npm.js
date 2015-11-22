@@ -95,7 +95,7 @@ function _compileRiotJsContent() {
     var output;
     var ext = '.js';
     var opts = {};
-    if (/\.tag\.jade$/.test(fileBasename)) {
+    if (/\.jade\.tag$/.test(fileBasename)) {
       opts.template = "jade";
     }
     try {
@@ -104,12 +104,12 @@ function _compileRiotJsContent() {
         data: output,
         path: file.getPathInPackage() + ext
       });
-    } catch (e) {console.log(e);}
+    } catch (e) {console.log(fileBasename);console.log(e);}
   });
 };
 Plugin.registerCompiler({
   extensions: [
-  "tag","tag.html","tag.jade"
+  "tag","jade.tag"
   ],
   filenames: []
 }, function() {

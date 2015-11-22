@@ -22,7 +22,7 @@ This package using method like [meteorhacks:npm](https://github.com/meteorhacks/
 
 In this package config, you need to add npm all packages that using for preprocessor. For ex, `jade` preprocessor need npm package `{"jade":"1.11.0"}`.
 
-If file has extension with '.tag.jade', compiler will automatic add option `{template:'jade'}`
+If file has extension with '.jade.tag', compiler will automatic add option `{template:'jade'}`
 For preprocessor for style, you need to add `type` in `style` definition in `tag` file
 For ex. 
 ```
