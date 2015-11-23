@@ -1,7 +1,7 @@
-var riotVersion = "2.3.1";
+var riotVersion = "2.3.11";
 Package.describe({
   summary: "riotjs preprocessor",
-  version: "2.3.1-35",
+  version: riotVersion + "-0",
   name: "baysao:riotjs",
   git: "https://github.com/baysao/meteor-riotjs-preprocessor.git"
 });
